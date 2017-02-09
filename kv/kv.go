@@ -3,7 +3,7 @@ package kv
 import (
 	"io/ioutil"
 	"path/filepath"
-
+        "fmt"
 	"github.com/vkorehov/go-git2consul/repository"
 	"github.com/hashicorp/consul/api"
 )
@@ -15,7 +15,8 @@ func (h *KVHandler) putKV(repo *repository.Repository, prefix string) error {
 	if err != nil {
 		return err
 	}
-
+	fmt.Printf("PUT FILE %s\n", filePath)
+        fmt.Printf("PUT VALUE %s\n", value)
 	p := &api.KVPair{
 		Key:   key,
 		Value: value,
