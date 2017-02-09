@@ -3,7 +3,6 @@ package kv
 import (
 	"io/ioutil"
 	"path/filepath"
-        "fmt"
 	"github.com/vkorehov/go-git2consul/repository"
 	"github.com/hashicorp/consul/api"
 )
@@ -11,12 +10,13 @@ import (
 func (h *KVHandler) putKV(repo *repository.Repository, prefix string) error {
 	key := prefix
 	filePath := filepath.Join(repo.Workdir(), prefix)
+        h.logger.Infof("KV FILE: %s", filePath)
 	value, err := ioutil.ReadFile(filePath)
 	if err != nil {
+                h.logger.Infof("KV FAILED: %s", err)
 		return err
 	}
-	fmt.Printf("PUT FILE %s\n", filePath)
-        fmt.Printf("PUT VALUE %s\n", value)
+        h.logger.Infof("KV VALUE: %s", value)
 	p := &api.KVPair{
 		Key:   key,
 		Value: value,
