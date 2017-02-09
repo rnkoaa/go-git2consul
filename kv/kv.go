@@ -1,6 +1,7 @@
 package kv
 
 import (
+        "time"
 	"io/ioutil"
 	"path/filepath"
 	"github.com/vkorehov/go-git2consul/repository"
