@@ -3,7 +3,6 @@ package kv
 import (
 	"io/ioutil"
 	"os"
-	"path"
 	"path/filepath"
 	"strings"
 
