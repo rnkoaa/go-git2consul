@@ -1,7 +1,6 @@
 package kv
 
 import (
-        "time"
 	"io/ioutil"
 	"path/filepath"
 	"github.com/vkorehov/go-git2consul/repository"
@@ -9,7 +8,7 @@ import (
 )
 
 func (h *KVHandler) putKV(repo *repository.Repository, prefix string) error {
-	repo.Head()
+	head, _ := repo.Head() // to force fetching stuff in /tmp
 	head.Branch().Name()
 
 	key := prefix
@@ -33,8 +32,9 @@ func (h *KVHandler) putKV(repo *repository.Repository, prefix string) error {
 }
 
 func (h *KVHandler) deleteKV(repo *repository.Repository, prefix string) error {
-        repo.Head()
+        head, _ := repo.Head()
         head.Branch().Name()
+
 	key := prefix
 
 	_, err := h.Delete(key, nil)
