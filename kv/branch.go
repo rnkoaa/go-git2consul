@@ -48,8 +48,8 @@ func (h *KVHandler) putBranch(repo *repository.Repository, branch *git.Branch) e
 		}
 
 		key := strings.TrimPrefix(fullpath, repo.Workdir())
-		kvPath := path.Join(repo.Name(), branchName, key)
-		h.logger.Debugf("KV PUT changes: %s/%s: %s", repo.Name(), branchName, kvPath)
+		kvPath := key
+		h.logger.Debugf("KV PUT changes: %s", kvPath)
 
 		data, err := ioutil.ReadFile(fullpath)
 		if err != nil {
