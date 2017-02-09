@@ -2,7 +2,6 @@ package repository
 
 import (
 	"fmt"
-
 	"gopkg.in/libgit2/git2go.v24"
 )
 
@@ -46,7 +45,7 @@ func (r *Repository) Clone(path string) error {
                 if err != nil {
                         return err
                 }
-                analysis, err := repo.Pull(branchName)
+                analysis, err := r.Pull(branchName)
                 if err != nil {
                         return err
                 }
@@ -54,11 +53,10 @@ func (r *Repository) Clone(path string) error {
                 // If there is a change, send the repo RepoChangeCh
                 switch {
                 case analysis&git.MergeAnalysisUpToDate != 0:
-                        w.logger.Debugf("Up to date: %s/%s", repo.Name(), branchName)
+                        fmt.Printf("Up to date: %s/%s\n", r.Name(), branchName)
                 case analysis&git.MergeAnalysisNormal != 0, analysis&git.MergeAnalysisFastForward != 0:
-                        w.logger.Infof("Changed: %s/%s", repo.Name(), branchName)
+                        fmt.Printf("Changed: %s/%s\n", r.Name(), branchName)
                 }
-
                 return nil
         }
 
@@ -66,6 +64,5 @@ func (r *Repository) Clone(path string) error {
         if err != nil && !git.IsErrorCode(err, git.ErrIterOver) {
                 return err
         }
-
 	return nil
 }
