@@ -40,12 +40,6 @@ func (h *KVHandler) putBranch(repo *repository.Repository, branch *git.Branch) e
 			return nil
 		}
 
-		// KV path, is repo/branch/file
-		branchName, err := branch.Name()
-		if err != nil {
-			return err
-		}
-
 		key := strings.TrimPrefix(fullpath, repo.Workdir())
 		kvPath := key
 		h.logger.Debugf("KV PUT changes: %s", kvPath)
