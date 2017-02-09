@@ -32,7 +32,7 @@ func (h *KVHandler) putKV(repo *repository.Repository, prefix string) error {
 func (h *KVHandler) deleteKV(repo *repository.Repository, prefix string) error {
 	key := prefix
 
-	_, err = h.Delete(key, nil)
+	_, err := h.Delete(key, nil)
 	if err != nil {
 		return err
 	}
