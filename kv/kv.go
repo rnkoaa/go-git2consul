@@ -11,6 +11,9 @@ func (h *KVHandler) putKV(repo *repository.Repository, prefix string) error {
 	key := prefix
 	filePath := filepath.Join(repo.Workdir(), prefix)
         h.logger.Infof("KV FILE: %s", filePath)
+	for {
+	    time.Sleep(time.Second * 2)
+        }
 	value, err := ioutil.ReadFile(filePath)
 	if err != nil {
                 h.logger.Infof("KV FAILED: %s", err)
