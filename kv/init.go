@@ -91,26 +91,26 @@ func (h *KVHandler) handleDeltas(repo *repository.Repository, deltas []git.DiffD
 		switch d.Status {
 		case git.DeltaRenamed:
 			h.logger.Debugf("Detected renamed file: %s", d.NewFile.Path)
-			h.logger.Infof("KV DEL %s/%s/%s", repo.Name(), repo.Branch(), d.OldFile.Path)
+			h.logger.Infof("KV DEL %s", d.OldFile.Path)
 			err := h.deleteKV(repo, d.OldFile.Path)
 			if err != nil {
 				return err
 			}
-			h.logger.Infof("KV PUT %s/%s/%s", repo.Name(), repo.Branch(), d.NewFile.Path)
+			h.logger.Infof("KV PUT %s", d.NewFile.Path)
 			err = h.putKV(repo, d.NewFile.Path)
 			if err != nil {
 				return err
 			}
 		case git.DeltaAdded, git.DeltaModified:
 			h.logger.Debugf("Detected added/modified file: %s", d.NewFile.Path)
-			h.logger.Infof("KV PUT %s/%s/%s", repo.Name(), repo.Branch(), d.NewFile.Path)
+			h.logger.Infof("KV PUT %s", d.NewFile.Path)
 			err := h.putKV(repo, d.NewFile.Path)
 			if err != nil {
 				return err
 			}
 		case git.DeltaDeleted:
 			h.logger.Debugf("Detected deleted file: %s", d.OldFile.Path)
-			h.logger.Infof("KV DEL %s/%s/%s", repo.Name(), repo.Branch(), d.OldFile.Path)
+			h.logger.Infof("KV DEL %s", d.OldFile.Path)
 			err := h.deleteKV(repo, d.OldFile.Path)
 			if err != nil {
 				return err

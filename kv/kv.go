@@ -2,7 +2,6 @@ package kv
 
 import (
 	"io/ioutil"
-	"path"
 	"path/filepath"
 
 	"github.com/vkorehov/go-git2consul/repository"
@@ -10,17 +9,7 @@ import (
 )
 
 func (h *KVHandler) putKV(repo *repository.Repository, prefix string) error {
-	head, err := repo.Head()
-	if err != nil {
-		return err
-	}
-
-	branchName, err := head.Branch().Name()
-	if err != nil {
-		return err
-	}
-
-	key := path.Join(repo.Name(), branchName, prefix)
+	key := prefix
 	filePath := filepath.Join(repo.Workdir(), prefix)
 	value, err := ioutil.ReadFile(filePath)
 	if err != nil {
@@ -41,17 +30,7 @@ func (h *KVHandler) putKV(repo *repository.Repository, prefix string) error {
 }
 
 func (h *KVHandler) deleteKV(repo *repository.Repository, prefix string) error {
-	head, err := repo.Head()
-	if err != nil {
-		return err
-	}
-
-	branchName, err := head.Branch().Name()
-	if err != nil {
-		return err
-	}
-
-	key := path.Join(repo.Name(), branchName, prefix)
+	key := prefix
 
 	_, err = h.Delete(key, nil)
 	if err != nil {
