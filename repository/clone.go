@@ -18,7 +18,7 @@ func (r *Repository) Clone(path string) error {
 	}
 	checkoutBranch := r.Config.Branches[0]
 
-	rawRepo, err := git.Clone(r.Config.Url, path, &git.CloneOptions{
+	repo, err := git.Clone(r.Config.Url, path, &git.CloneOptions{
 		CheckoutOpts: &git.CheckoutOpts{
 			Strategy: git.CheckoutNone,
 		},
@@ -28,12 +28,44 @@ func (r *Repository) Clone(path string) error {
 		return err
 	}
 
-	r.Repository = rawRepo
+	r.Repository = repo
 
 	err = r.checkoutConfigBranches()
 	if err != nil {
 		return err
 	}
+
+        itr, err := repo.NewBranchIterator(git.BranchLocal)
+        if err != nil {
+                return err
+        }
+        defer itr.Free()
+
+        var checkoutBranchFn = func(b *git.Branch, _ git.BranchType) error {
+                branchName, err := b.Name()
+                if err != nil {
+                        return err
+                }
+                analysis, err := repo.Pull(branchName)
+                if err != nil {
+                        return err
+                }
+
+                // If there is a change, send the repo RepoChangeCh
+                switch {
+                case analysis&git.MergeAnalysisUpToDate != 0:
+                        w.logger.Debugf("Up to date: %s/%s", repo.Name(), branchName)
+                case analysis&git.MergeAnalysisNormal != 0, analysis&git.MergeAnalysisFastForward != 0:
+                        w.logger.Infof("Changed: %s/%s", repo.Name(), branchName)
+                }
+
+                return nil
+        }
+
+        err = itr.ForEach(checkoutBranchFn)
+        if err != nil && !git.IsErrorCode(err, git.ErrIterOver) {
+                return err
+        }
 
 	return nil
 }
