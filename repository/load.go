@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 
-	"github.com/Cimpress-MCP/go-git2consul/config"
+	"github.com/vkorehov/go-git2consul/config"
 	"github.com/apex/log"
 )
 

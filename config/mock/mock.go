@@ -4,7 +4,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/Cimpress-MCP/go-git2consul/config"
+	"github.com/vkorehov/go-git2consul/config"
 )
 
 // RepoConfig returns a mock Repo config object

@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/Cimpress-MCP/go-git2consul/config/mock"
-	"github.com/Cimpress-MCP/go-git2consul/testutil"
+	"github.com/vkorehov/go-git2consul/config/mock"
+	"github.com/vkorehov/go-git2consul/testutil"
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/discard"
 	"gopkg.in/libgit2/git2go.v24"

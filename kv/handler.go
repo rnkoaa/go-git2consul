@@ -4,7 +4,7 @@ import (
 	"crypto/tls"
 	"net/http"
 
-	"github.com/Cimpress-MCP/go-git2consul/config"
+	"github.com/vkorehov/go-git2consul/config"
 	"github.com/apex/log"
 	"github.com/hashicorp/consul/api"
 )

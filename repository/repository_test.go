@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/Cimpress-MCP/go-git2consul/config/mock"
-	"github.com/Cimpress-MCP/go-git2consul/testutil"
+	"github.com/vkorehov/go-git2consul/config/mock"
+	"github.com/vkorehov/go-git2consul/testutil"
 )
 
 func TestNew(t *testing.T) {

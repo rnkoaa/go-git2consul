@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/Cimpress-MCP/go-git2consul/repository"
+	"github.com/vkorehov/go-git2consul/repository"
 	"github.com/apex/log"
 	"github.com/hashicorp/consul/api"
 	"gopkg.in/libgit2/git2go.v24"

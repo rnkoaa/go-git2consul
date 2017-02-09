@@ -1,7 +1,7 @@
 package kv
 
 import (
-	"github.com/Cimpress-MCP/go-git2consul/repository"
+	"github.com/vkorehov/go-git2consul/repository"
 	"gopkg.in/libgit2/git2go.v24"
 )
 

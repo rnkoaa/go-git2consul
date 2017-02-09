@@ -4,9 +4,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/Cimpress-MCP/go-git2consul/repository"
-	"github.com/Cimpress-MCP/go-git2consul/repository/mock"
-	"github.com/Cimpress-MCP/go-git2consul/testutil"
+	"github.com/vkorehov/go-git2consul/repository"
+	"github.com/vkorehov/go-git2consul/repository/mock"
+	"github.com/vkorehov/go-git2consul/testutil"
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/discard"
 )

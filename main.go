@@ -7,8 +7,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/Cimpress-MCP/go-git2consul/config"
-	"github.com/Cimpress-MCP/go-git2consul/runner"
+	"github.com/vkorehov/go-git2consul/config"
+	"github.com/vkorehov/go-git2consul/runner"
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/text"
 )
