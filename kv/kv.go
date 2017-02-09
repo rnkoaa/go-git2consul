@@ -9,18 +9,16 @@ import (
 )
 
 func (h *KVHandler) putKV(repo *repository.Repository, prefix string) error {
+	repo.Head()
+	head.Branch().Name()
+
 	key := prefix
 	filePath := filepath.Join(repo.Workdir(), prefix)
-        h.logger.Infof("KV FILE: %s", filePath)
-	for {
-	    time.Sleep(time.Second * 2)
-        }
 	value, err := ioutil.ReadFile(filePath)
 	if err != nil {
-                h.logger.Infof("KV FAILED: %s", err)
+                h.logger.Infof("KV FAILED: '%s' %s", filePath, err)
 		return err
 	}
-        h.logger.Infof("KV VALUE: %s", value)
 	p := &api.KVPair{
 		Key:   key,
 		Value: value,
@@ -35,6 +33,8 @@ func (h *KVHandler) putKV(repo *repository.Repository, prefix string) error {
 }
 
 func (h *KVHandler) deleteKV(repo *repository.Repository, prefix string) error {
+        repo.Head()
+        head.Branch().Name()
 	key := prefix
 
 	_, err := h.Delete(key, nil)

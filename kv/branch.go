@@ -46,6 +46,7 @@ func (h *KVHandler) putBranch(repo *repository.Repository, branch *git.Branch) e
 
 		data, err := ioutil.ReadFile(fullpath)
 		if err != nil {
+                        h.logger.Debugf("KV FAILED changes: '%s' %s", fullpath, kvPath)
 			return err
 		}
 
